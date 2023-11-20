@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor with Live Preview</title>
+    <!-- Include Ace Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loading_styles.css">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-code">
+            <pre>
+                <code id="html-code"></code>
+            </pre>
+        </div>
+        <div class="loading-text">Loading</div>
+    </div>
+    <div class="sidenav">
+        <div id="cursor-position"><span id="position"></span></div>
+        <button onclick="toggleGutter()">Toggle Gutter</button>
+        <button onclick="resetEditorSettings()">Reset Editor Settings</button>
+        <button onclick="downloadCodeAsFile()">Download Code</button>
+        <input type="file" id="file-input" onchange="loadFile()" />
+        <button onclick="triggerFileInput()">Upload File</button>
+        <button onclick="generateShareableLink()">Share Code</button>
+        
+        <label for="theme-select">Select Theme</label>
+        <select id="theme-select" onchange="changeTheme()">
+            <option value="twilight">Twilight</option>
+            <option value="dawn">Dawn</option>
+            <option value="monokai">Monokai</option>
+            <option value="solarized_light">Solarized Light</option>
+            <option value="solarized_dark">Solarized Dark</option>
+            <option value="crimson_editor">Crimson Editor</option>
+            <option value="dracula">Dracula</option>
+        </select>
+	<label for="font-size-slider">Font Size</label>
+        <button onclick="toggleFontSizeSlider()">Toggle Font Size</button>
+        <div id="font-size-slider-container">
+            
+            <input type="range" id="font-size-slider" min="10" max="30" step="2" value="14" oninput="changeFontSizeSliderValue()">
+            <span id="font-size-value">14px</span>
+        </div>
+
+        <label for="font-family-select">Select Font Family</label>
+        <select id="font-family-select" onchange="changeFontFamily()">
+            <option value="monospace">Monospace</option>
+            <option value="sans-serif">Sans-serif</option>
+            <option value="serif">Serif</option>
+            <!-- Add more font families as needed -->
+        </select>
+
+	<label for="language-select">Select Language Mode</label>
+	<select id="language-select" onchange="changeLanguageMode()">
+	    <option value="html">HTML</option>
+	    <option value="css">CSS</option>
+	    <option value="javascript">JavaScript</option>
+	    <option value="text">Text</option>
+	</select>
+
+        <label for="template-select">Insert Template</label>
+        <select id="template-select">
+            <option value="html">HTML</option>
+            <option value="javascript">JavaScript</option>
+       </select>
+       <button onclick="insertTemplateCode()">Insert Template</button>
+    </div>
+	    
+	<!-- Help Button -->
+	<div id="help-button">?</div>
+
+	<!-- Overlay -->
+	<div id="overlay">
+	    <!-- Close Button -->
+	    <div id="close-button">X</div>
+
+	    <!-- Help Panel -->
+	    <div id="help-panel">
+		<!-- Page 1 -->
+		<div id="page1" class="page">
+		    <h1>Help</h1>
+		    
+		    <button onclick="changePage('page2')">Next</button>
+		</div>
+
+		<!-- Page 2 -->
+		<div id="page2" class="page" style="display: none;">
+		    <!-- Your help content for page 2 goes here -->
+		    <button onclick="changePage('page1')">Previous</button>
+		</div>
+
+		<!-- Add more pages as needed -->
+	    </div>
+	</div>
+
+    <!-- Your code editor container -->
+    <div id="editor"></div>
+
+    <!-- Live preview container -->
+    <iframe id="preview"></iframe>
+
+    <script src="main.js"></script>
+    <script src="loading.js"></script>
+</body>
+</html>
